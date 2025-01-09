@@ -95,12 +95,19 @@ export const Pages: CollectionConfig<'pages'> = {
             }),
             MetaTitleField({
               hasGenerateFn: true,
+              overrides: {
+                minLength: 10,
+              },
             }),
             MetaImageField({
               relationTo: 'media',
             }),
 
-            MetaDescriptionField({}),
+            MetaDescriptionField({
+              overrides: {
+                minLength: 50,
+              },
+            }),
             PreviewField({
               // if the `generateUrl` function is configured
               hasGenerateFn: true,

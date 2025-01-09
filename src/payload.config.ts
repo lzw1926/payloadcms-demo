@@ -14,7 +14,8 @@ import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
 import { Header } from './Header/config'
 import { plugins } from './plugins'
-import { defaultLexical } from '@/fields/defaultLexical'
+// import { defaultLexical } from '@/fields/defaultLexical'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { getServerSideURL } from './utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
@@ -23,13 +24,30 @@ const dirname = path.dirname(filename)
 export default buildConfig({
   admin: {
     components: {
+      graphics: {
+        Icon: '@/components/Logo/Icon.tsx',
+        Logo: '@/components/AdminLogin/Logo.tsx',
+      },
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeLogin` statement on line 15.
       beforeLogin: ['@/components/BeforeLogin'],
       // The `BeforeDashboard` component renders the 'welcome' block that you see after logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below and the import `BeforeDashboard` statement on line 15.
       beforeDashboard: ['@/components/BeforeDashboard'],
+      // views: {
+      //   unauthorized: {
+      //     Component: '@/components/AdminLogin/Unauthorized.tsx',
+      //     path: '/unauthorized',
+      //     exact: true,
+      //     strict: true,
+      //   },
+      // },
     },
+    routes: {
+      login: '/auth',
+      unauthorized: '/auth/unauthorized',
+    },
+    theme: 'light',
     importMap: {
       baseDir: path.resolve(dirname),
     },
@@ -58,7 +76,8 @@ export default buildConfig({
     },
   },
   // This config helps us configure global or default features that the other editors can inherit
-  editor: defaultLexical,
+  // editor: defaultLexical,
+  editor: lexicalEditor(),
   db: postgresAdapter({
     pool: {
       connectionString: process.env.DATABASE_URI || '',

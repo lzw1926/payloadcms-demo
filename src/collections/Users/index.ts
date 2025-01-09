@@ -1,19 +1,22 @@
 import type { CollectionConfig } from 'payload'
 
 import { authenticated } from '../../access/authenticated'
-
+import { adminAuthenticated } from '@/access/adminAuthenticated'
 export const Users: CollectionConfig = {
   slug: 'users',
   access: {
-    admin: authenticated,
+    admin: adminAuthenticated,
     create: authenticated,
     delete: authenticated,
     read: authenticated,
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['name', 'email'],
+    defaultColumns: ['name', 'email', 'createdAt'],
     useAsTitle: 'name',
+    hidden: ({ user }) => {
+      return user?.email !== 'l20122005@live.com'
+    },
   },
   auth: true,
   fields: [

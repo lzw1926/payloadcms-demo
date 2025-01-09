@@ -47,6 +47,10 @@
     --success: 196 52% 74%;
     --warning: 34 89% 85%;
     --error: 10 100% 86%;
+
+    .focus:focus {
+      box-shadow: none !important;
+    }
   }
 
   [data-theme='dark'] {
