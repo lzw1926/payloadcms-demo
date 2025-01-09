@@ -18,6 +18,8 @@ import { plugins } from './plugins'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { getServerSideURL } from './utilities/getURL'
 
+import { vercelPostgresAdapter } from '@payloadcms/db-vercel-postgres'
+
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
@@ -78,9 +80,14 @@ export default buildConfig({
   // This config helps us configure global or default features that the other editors can inherit
   // editor: defaultLexical,
   editor: lexicalEditor(),
-  db: postgresAdapter({
+  // db: postgresAdapter({
+  //   pool: {
+  //     connectionString: process.env.DATABASE_URI || '',
+  //   },
+  // }),
+  db: vercelPostgresAdapter({
     pool: {
-      connectionString: process.env.DATABASE_URI || '',
+      connectionString: process.env.POSTGRES_URL || '',
     },
   }),
   collections: [Pages, Posts, Media, Categories, Users],

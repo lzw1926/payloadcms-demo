@@ -26,8 +26,12 @@ export const generatePreviewPath = ({ collection, slug, req }: Props) => {
     encodedParams.append(key, value)
   })
 
+  const customServeUrl = process.env.NEXT_PUBLIC_SERVER_URL
+  // REVIEW
   const isProduction =
-    process.env.NODE_ENV === 'production' || Boolean(process.env.VERCEL_PROJECT_PRODUCTION_URL)
+    process.env.NODE_ENV === 'production' ||
+    Boolean(process.env.VERCEL_PROJECT_PRODUCTION_URL) ||
+    customServeUrl?.startsWith('https')
   const protocol = isProduction ? 'https:' : req.protocol
 
   const url = `${protocol}//${req.host}/next/preview?${encodedParams.toString()}`
