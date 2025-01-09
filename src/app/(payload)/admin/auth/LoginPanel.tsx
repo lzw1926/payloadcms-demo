@@ -11,8 +11,8 @@ export function LoginPanel(props: LoginPanelProps) {
   const searchParams = useSearchParams()
   const redirect = searchParams.get('redirect')
   const handleLogin = async () => {
-    const res = await login('l20122005@live.com', 'pypy321')
-    // const res = await login('lzw@meitu.com', '54321')
+    // const res = await login('l20122005@live.com', 'pypy321')
+    const res = await login('lzw@meitu.com', '54321')
     console.log(res)
     props.onLogin?.()
     router.replace(redirect ? decodeURIComponent(redirect) : '/admin')

@@ -15,7 +15,7 @@ export const Users: CollectionConfig = {
     defaultColumns: ['name', 'email', 'createdAt'],
     useAsTitle: 'name',
     hidden: ({ user }) => {
-      return user?.email !== 'l20122005@live.com'
+      return user?.email !== 'lzw@meitu.com'
     },
   },
   auth: true,
